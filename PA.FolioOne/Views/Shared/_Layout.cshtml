@@ -1,11 +1,40 @@
-﻿<!DOCTYPE html>
+﻿<!--
+    index
+    about
+    contact
+    portfolio
+    portfolio-details
+    resume
+    services
+    service-details
+-->
+
+@{
+    string action = ViewContext.RouteData.Values["action"]?.ToString() ?? "Index";
+    
+    string actionPage = action switch
+    {
+        "Index" => "index",
+        "About" => "about",
+        "Contact" => "contact",
+        "Portfolio" => "portfolio",
+        "PortfolioDetails" => "portfolio-details",
+        "Resume" => "resume",
+        "Services" => "services",
+        "ServiceDetail" => "service-details",
+        _ => "index"
+    };
+
+}
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <partial name="_Partial" />
 </head>
 
-<body class="index-page">
+<body class="@actionPage">
 
     <partial name="_Header" />
 
