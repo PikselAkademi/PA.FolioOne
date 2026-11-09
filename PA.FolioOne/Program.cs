@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using PA.FolioOne.Models;
+
 namespace PA.FolioOne;
 
 public class Program
@@ -6,6 +9,14 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         builder.AddServiceDefaults();
+
+        builder.Services.AddDbContext<FolioOneDbContext>(options =>
+        {
+            options.UseSqlServer(builder.Configuration.GetConnectionString("FolioOne"));
+        });
+
+        //builder.Configuration.GetConnectionString("FolioOne");
+        //builder.Configuration["ConnectionStrings:FolioOne"];
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
