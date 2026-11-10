@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PA.FolioOne.Models.Entities;
 
 namespace PA.FolioOne.Models
 {
@@ -11,7 +12,8 @@ namespace PA.FolioOne.Models
         public FolioOneDbContext(DbContextOptions<FolioOneDbContext> options)
             : base(options) { }
 
-        //Tables
+        public DbSet<SocialLink> SocialLinks { get; set; }
+        public DbSet<Footer> Footers { get; set; }
 
         //Other Configurations
     }

@@ -19,8 +19,4 @@
     <ProjectReference Include="..\PA.FolioOne.ServiceDefaults\PA.FolioOne.ServiceDefaults.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Entities\" />
-  </ItemGroup>
-
 </Project>
