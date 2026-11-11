@@ -14,6 +14,7 @@ namespace PA.FolioOne.Models
 
         public DbSet<SocialLink> SocialLinks { get; set; }
         public DbSet<Footer> Footers { get; set; }
+        public DbSet<HomePage> HomePages { get; set; }
 
         //Other Configurations
     }
