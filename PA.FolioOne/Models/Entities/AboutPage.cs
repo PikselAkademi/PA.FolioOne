@@ -54,7 +54,7 @@ namespace PA.FolioOne.Models.Entities
 
         [DisplayName("Rozet Başlığı")]
         public string? BadgeTitle { get; set; }
-        //About Badges
+        [NotMapped] public List<AboutBadge>? AboutBadges { get; set; }
         [DisplayName("Rozetleri Göster")]
         public bool ShowBadges { get; set; }
 
