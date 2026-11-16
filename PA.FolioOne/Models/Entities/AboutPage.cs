@@ -94,7 +94,7 @@ namespace PA.FolioOne.Models.Entities
         public string? TestimonialTitle { get; set; }
         [DisplayName("Referans Açıklaması")]
         public string? TestimonialDescription { get; set; }
-        //Testimonial
+        [NotMapped] public List<Testimonial>? Testimonials { get; set; }
         [DisplayName("Referansları Göster")]
         public bool ShowTestimonials { get; set; }
     }

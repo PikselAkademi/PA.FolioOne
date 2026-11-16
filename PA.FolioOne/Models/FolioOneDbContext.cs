@@ -20,6 +20,7 @@ namespace PA.FolioOne.Models
         public DbSet<TimeLine> TimeLines { get; set; }
         public DbSet<AboutBadge> AboutBadges { get; set; }
         public DbSet<Skill> Skills { get; set; }
+        public DbSet<Testimonial> Testimonials { get; set; }
 
         //Other Configurations
     }
