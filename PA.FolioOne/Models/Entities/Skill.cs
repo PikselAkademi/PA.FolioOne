@@ -20,5 +20,8 @@ namespace PA.FolioOne.Models.Entities
         [Required(ErrorMessage = "Yetenek yüzdesi zorunludur.")]
         [Range(0, 100, ErrorMessage = "Yetenek yüzdesi 0 ile 100 arasında olmalıdır.")]
         public byte Percentage { get; set; }
+
+        [DisplayName("Yetenek Sırası")]
+        public byte Order { get; set; }
     }
 }
