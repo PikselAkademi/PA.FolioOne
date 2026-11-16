@@ -21,7 +21,25 @@ namespace PA.FolioOne.Models
         public DbSet<AboutBadge> AboutBadges { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
+        public DbSet<ResumePage> ResumePages { get; set; }
+        public DbSet<ResumeCategory> ResumeCategories { get; set; }
+        public DbSet<ResumeItem> ResumeItems { get; set; }
 
-        //Other Configurations
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<ResumeCategory>()
+            //    .HasMany(x => x.Items)
+            //    .WithOne(x => x.Category)
+            //    .HasForeignKey(x => x.CategoryId);
+
+            modelBuilder.Entity<ResumeItem>()
+                .HasOne(x => x.Category)
+                .WithMany(x => x.Items)
+                .HasForeignKey(x => x.CategoryId);
+
+
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
