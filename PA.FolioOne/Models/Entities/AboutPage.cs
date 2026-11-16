@@ -62,7 +62,7 @@ namespace PA.FolioOne.Models.Entities
         public string? SkillTitle { get; set; }
         [DisplayName("Yetenek Açıklaması")]
         public string? SkillDescription { get; set; }
-        //Skills
+        [NotMapped] public List<Skill>? Skills { get; set; }
         [DisplayName("Yetenekleri Göster")]
         public bool ShowSkills { get; set; }
 
