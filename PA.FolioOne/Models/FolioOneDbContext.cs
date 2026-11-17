@@ -25,12 +25,15 @@ namespace PA.FolioOne.Models
         public DbSet<ResumeCategory> ResumeCategories { get; set; }
         public DbSet<ResumeItem> ResumeItems { get; set; }
         public DbSet<ServicePage> ServicePages { get; set; }
-
         public DbSet<Service> Services { get; set; }
         public DbSet<ServiceDetail> ServiceDetails { get; set; }
         public DbSet<ServiceBenefitCard> ServiceBenefitCards { get; set; }
         public DbSet<ServiceTimeline> ServiceTimelines { get; set; }
         public DbSet<ServiceMessage> ServiceMessages { get; set; }
+        public DbSet<ServiceCategory> ServiceCategories { get; set; }
+        public DbSet<ContactPage> ContactPages { get; set; }
+        public DbSet<ContactMessage> ContactMessages { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
