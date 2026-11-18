@@ -314,6 +314,178 @@ namespace PA.FolioOne.Migrations
                     b.ToTable("HomePages");
                 });
 
+            modelBuilder.Entity("PA.FolioOne.Models.Entities.PortfolioCategory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("FilterClass")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PortfolioCategories");
+                });
+
+            modelBuilder.Entity("PA.FolioOne.Models.Entities.PortfolioItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subtitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("PortfolioItems");
+                });
+
+            modelBuilder.Entity("PA.FolioOne.Models.Entities.PortfolioItemCard", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IconClass")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ItemId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte>("Order")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("PortfolioItemCards");
+                });
+
+            modelBuilder.Entity("PA.FolioOne.Models.Entities.PortfolioItemDetail", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Client")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Features")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FeaturesTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("PortfolioDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PortfolioUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PortfolioItemDetails");
+                });
+
+            modelBuilder.Entity("PA.FolioOne.Models.Entities.PortfolioItemImage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ImageAlt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ItemId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte>("Order")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("PortfolioItemImages");
+                });
+
+            modelBuilder.Entity("PA.FolioOne.Models.Entities.PortfolioPage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PortfolioPages");
+                });
+
+            modelBuilder.Entity("PA.FolioOne.Models.Entities.PortfolioTag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PortfolioTags");
+                });
+
             modelBuilder.Entity("PA.FolioOne.Models.Entities.ResumeCategory", b =>
                 {
                     b.Property<Guid>("Id")
@@ -739,6 +911,65 @@ namespace PA.FolioOne.Migrations
                     b.ToTable("TimeLines");
                 });
 
+            modelBuilder.Entity("PortfolioItemTags", b =>
+                {
+                    b.Property<Guid>("ItemsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TagsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ItemsId", "TagsId");
+
+                    b.HasIndex("TagsId");
+
+                    b.ToTable("PortfolioItemTags");
+                });
+
+            modelBuilder.Entity("PA.FolioOne.Models.Entities.PortfolioItem", b =>
+                {
+                    b.HasOne("PA.FolioOne.Models.Entities.PortfolioCategory", "Category")
+                        .WithMany("Items")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("PA.FolioOne.Models.Entities.PortfolioItemCard", b =>
+                {
+                    b.HasOne("PA.FolioOne.Models.Entities.PortfolioItem", "Item")
+                        .WithMany("Cards")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Item");
+                });
+
+            modelBuilder.Entity("PA.FolioOne.Models.Entities.PortfolioItemDetail", b =>
+                {
+                    b.HasOne("PA.FolioOne.Models.Entities.PortfolioItem", "Item")
+                        .WithOne("Detail")
+                        .HasForeignKey("PA.FolioOne.Models.Entities.PortfolioItemDetail", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Item");
+                });
+
+            modelBuilder.Entity("PA.FolioOne.Models.Entities.PortfolioItemImage", b =>
+                {
+                    b.HasOne("PA.FolioOne.Models.Entities.PortfolioItem", "Item")
+                        .WithMany("Images")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Item");
+                });
+
             modelBuilder.Entity("PA.FolioOne.Models.Entities.ResumeItem", b =>
                 {
                     b.HasOne("PA.FolioOne.Models.Entities.ResumeCategory", "Category")
@@ -814,6 +1045,35 @@ namespace PA.FolioOne.Migrations
                         .IsRequired();
 
                     b.Navigation("Service");
+                });
+
+            modelBuilder.Entity("PortfolioItemTags", b =>
+                {
+                    b.HasOne("PA.FolioOne.Models.Entities.PortfolioItem", null)
+                        .WithMany()
+                        .HasForeignKey("ItemsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PA.FolioOne.Models.Entities.PortfolioTag", null)
+                        .WithMany()
+                        .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PA.FolioOne.Models.Entities.PortfolioCategory", b =>
+                {
+                    b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("PA.FolioOne.Models.Entities.PortfolioItem", b =>
+                {
+                    b.Navigation("Cards");
+
+                    b.Navigation("Detail");
+
+                    b.Navigation("Images");
                 });
 
             modelBuilder.Entity("PA.FolioOne.Models.Entities.ResumeCategory", b =>

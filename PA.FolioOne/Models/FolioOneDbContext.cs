@@ -39,7 +39,7 @@ namespace PA.FolioOne.Models
         public DbSet<PortfolioItemDetail> PortfolioItemDetails { get; set; }
         public DbSet<PortfolioItemImage> PortfolioItemImages { get; set; }
         public DbSet<PortfolioItemCard> PortfolioItemCards { get; set; }
-
+        public DbSet<PortfolioTag> PortfolioTags { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -58,6 +58,25 @@ namespace PA.FolioOne.Models
                 .HasOne(x => x.Detail)
                 .WithOne(x => x.Item)
                 .HasForeignKey<PortfolioItemDetail>(x => x.Id);
+
+            modelBuilder.Entity<PortfolioItem>()
+                .HasMany(x => x.Tags)
+                .WithMany(x => x.Items)
+                .UsingEntity("PortfolioItemTags");
+
+            //modelBuilder.Entity<PortfolioItem>()
+            //    .HasMany(x => x.Tags)
+            //    .WithMany(x => x.Items)
+            //    .UsingEntity("PortfolioItemTags",
+            //        r => r.HasOne(typeof(PortfolioTag))
+            //            .WithMany()
+            //            .HasForeignKey("TagId")
+            //            .HasPrincipalKey(nameof(PortfolioTag.Id)),
+            //        l => l.HasOne(typeof(PortfolioItem))
+            //            .WithMany()
+            //            .HasForeignKey("ItemId")
+            //            .HasPrincipalKey(nameof(PortfolioItem.Id)),
+            //        j => j.HasKey("ItemId", "TagId"));
 
 
             base.OnModelCreating(modelBuilder);

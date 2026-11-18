@@ -29,5 +29,7 @@ namespace PA.FolioOne.Models.Entities
 
         public List<PortfolioItemImage>? Images { get; set; }
         public List<PortfolioItemCard>? Cards { get; set; }
+
+        public List<PortfolioTag>? Tags { get; set; }
     }
 }
