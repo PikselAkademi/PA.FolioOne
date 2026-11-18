@@ -33,6 +33,13 @@ namespace PA.FolioOne.Models
         public DbSet<ServiceCategory> ServiceCategories { get; set; }
         public DbSet<ContactPage> ContactPages { get; set; }
         public DbSet<ContactMessage> ContactMessages { get; set; }
+        public DbSet<PortfolioPage> PortfolioPages { get; set; }
+        public DbSet<PortfolioCategory> PortfolioCategories { get; set; }
+        public DbSet<PortfolioItem> PortfolioItems { get; set; }
+        public DbSet<PortfolioItemDetail> PortfolioItemDetails { get; set; }
+        public DbSet<PortfolioItemImage> PortfolioItemImages { get; set; }
+        public DbSet<PortfolioItemCard> PortfolioItemCards { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -47,6 +54,10 @@ namespace PA.FolioOne.Models
                 .WithMany(x => x.Items)
                 .HasForeignKey(x => x.CategoryId);
 
+            modelBuilder.Entity<PortfolioItem>()
+                .HasOne(x => x.Detail)
+                .WithOne(x => x.Item)
+                .HasForeignKey<PortfolioItemDetail>(x => x.Id);
 
 
             base.OnModelCreating(modelBuilder);

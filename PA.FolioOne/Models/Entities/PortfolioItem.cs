@@ -24,5 +24,10 @@ namespace PA.FolioOne.Models.Entities
 
         [ForeignKey(nameof(CategoryId))]
         public PortfolioCategory? Category { get; set; }
+
+        public PortfolioItemDetail? Detail { get; set; }
+
+        public List<PortfolioItemImage>? Images { get; set; }
+        public List<PortfolioItemCard>? Cards { get; set; }
     }
 }
