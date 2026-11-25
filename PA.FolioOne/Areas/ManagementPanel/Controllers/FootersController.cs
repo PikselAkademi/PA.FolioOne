@@ -34,5 +34,18 @@ namespace PA.FolioOne.Areas.ManagementPanel.Controllers
 
             return View(model);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(Footer model)
+        {
+            if (!ModelState.IsValid)
+                return View("Index", model);
+
+            _context.Footers.Update(model);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
